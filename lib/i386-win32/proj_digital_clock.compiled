@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CONFIG>
-  <Compiler Value="C:\lazarus\fpc\3.0.0\bin\i386-win32\fpc.exe" Date="1213097031"/>
-  <Params Value=" -MObjFPC -Scghi -CX -O3 -Xs -XX -WG -l -vewnhibq &quot;-FiB:\AJAR\Lab\Simakad SHIELD\lib\i386-win32&quot; -FuC:\Users\SWU\Downloads\luipack-master\uniqueinstance\lib\i386-win32-win32 -FuC:\lazarus\lcl\units\i386-win32\win32 -FuC:\lazarus\lcl\units\i386-win32 -FuC:\lazarus\components\lazutils\lib\i386-win32 -FuC:\lazarus\packager\units\i386-win32 &quot;-FuB:\AJAR\Lab\Simakad SHIELD\&quot; &quot;-FUB:\AJAR\Lab\Simakad SHIELD\lib\i386-win32\&quot; &quot;-oSWU Data SHIELD.exe&quot; -dLCL -dLCLwin32 proj_digital_clock.lpr"/>
-</CONFIG>
