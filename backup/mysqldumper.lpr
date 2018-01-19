@@ -22,7 +22,7 @@ begin
 
   RequireDerivedFormResource := True;
   Application.Initialize;
-  Application.ShowMainForm := False;
+  //Application.ShowMainForm := False;      
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmSetup, frmSetup);
   Application.CreateForm(TfrmAbout, frmAbout);

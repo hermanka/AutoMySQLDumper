@@ -72,6 +72,7 @@ begin
   try
      FinishedConfig := INI.ReadInteger(C_SECTION,'FinishedConfig',1);
 
+     dbname := INI.ReadString(C_SECTION,'dbName','');
      if FinishedConfig = 0 then
      begin
       Application.CreateForm(TfrmSetup, frmSetup);
