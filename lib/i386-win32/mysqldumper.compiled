@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CONFIG>
-  <Compiler Value="C:\lazarus\fpc\3.0.4\bin\i386-win32\fpc.exe" Date="1266908409"/>
-  <Params Value=" -MObjFPC -Scghi -CX -O3 -Xs -XX -WG -l -vewnhibq -FiD:\GitProject\MySQLDumper\lib\i386-win32 -FuD:\Downloads\uniqueinstance-1.1\lib\i386-win32-win32 -FuC:\lazarus\lcl\units\i386-win32\win32 -FuC:\lazarus\lcl\units\i386-win32 -FuC:\lazarus\components\lazutils\lib\i386-win32 -FuC:\lazarus\packager\units\i386-win32 -FuD:\GitProject\MySQLDumper\ -FUD:\GitProject\MySQLDumper\lib\i386-win32\ -oMySQLDumper.exe -dLCL -dLCLwin32 mysqldumper.lpr"/>
-</CONFIG>
