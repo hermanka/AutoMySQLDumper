@@ -1,9 +1,9 @@
 object frmSetup: TfrmSetup
-  Left = 310
+  Left = 274
   Height = 347
-  Top = 158
+  Top = 156
   Width = 438
-  BorderStyle = bsSingle
+  BorderStyle = bsDialog
   Caption = 'Configuration'
   ClientHeight = 347
   ClientWidth = 438
@@ -14,7 +14,8 @@ object frmSetup: TfrmSetup
     Left = 180
     Height = 23
     Top = 46
-    Width = 232
+    Width = 196
+    ReadOnly = True
     TabOrder = 0
     Text = 'eSaveTo'
   end
@@ -40,7 +41,8 @@ object frmSetup: TfrmSetup
     Left = 180
     Height = 23
     Top = 142
-    Width = 232
+    Width = 196
+    ReadOnly = True
     TabOrder = 3
     Text = 'eBinLoc'
   end
@@ -225,5 +227,27 @@ object frmSetup: TfrmSetup
     Caption = 'Quit'
     OnClick = btnQuitClick
     TabOrder = 12
+  end
+  object btnSelDirSaveTo: TButton
+    Left = 377
+    Height = 23
+    Top = 46
+    Width = 35
+    Caption = '...'
+    OnClick = btnSelDirSaveToClick
+    TabOrder = 13
+  end
+  object btnSelDirBin: TButton
+    Left = 377
+    Height = 23
+    Top = 142
+    Width = 35
+    Caption = '...'
+    OnClick = btnSelDirBinClick
+    TabOrder = 14
+  end
+  object selDir: TSelectDirectoryDialog
+    left = 248
+    top = 8
   end
 end

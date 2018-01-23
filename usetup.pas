@@ -15,6 +15,8 @@ type
     btnSaveConf: TButton;
     btnClose: TButton;
     btnQuit: TButton;
+    btnSelDirSaveTo: TButton;
+    btnSelDirBin: TButton;
     eBackupTimeH: TEdit;
     eBinLoc: TEdit;
     eDBName: TEdit;
@@ -37,9 +39,12 @@ type
     Label8: TLabel;
     Label9: TLabel;
     Minute: TLabel;
+    selDir: TSelectDirectoryDialog;
     procedure btnCloseClick(Sender: TObject);
     procedure btnQuitClick(Sender: TObject);
     procedure btnSaveConfClick(Sender: TObject);
+    procedure btnSelDirBinClick(Sender: TObject);
+    procedure btnSelDirSaveToClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
 
@@ -124,6 +129,19 @@ begin
   except
     ShowMessage('Fail saved!');
   end;
+end;
+
+procedure TfrmSetup.btnSelDirBinClick(Sender: TObject);
+begin
+  if selDir.Execute then
+     eBinLoc.Text := selDir.FileName;
+end;
+
+procedure TfrmSetup.btnSelDirSaveToClick(Sender: TObject);
+begin
+  if selDir.Execute then
+     eSaveTo.Text := selDir.FileName;
+
 end;
 
 
