@@ -1,12 +1,12 @@
 object frmSetup: TfrmSetup
   Left = 310
-  Height = 286
+  Height = 347
   Top = 158
-  Width = 455
+  Width = 438
   BorderStyle = bsSingle
   Caption = 'Configuration'
-  ClientHeight = 286
-  ClientWidth = 455
+  ClientHeight = 347
+  ClientWidth = 438
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '1.8.0.6'
@@ -25,7 +25,7 @@ object frmSetup: TfrmSetup
     Width = 30
     MaxLength = 2
     TabOrder = 1
-    Text = 'eBackupTimeH'
+    Text = 'eB'
   end
   object eMaxFile: TEdit
     Left = 180
@@ -111,7 +111,7 @@ object frmSetup: TfrmSetup
   object btnSaveConf: TButton
     Left = 23
     Height = 25
-    Top = 247
+    Top = 306
     Width = 75
     Caption = 'Save'
     OnClick = btnSaveConfClick
@@ -140,7 +140,7 @@ object frmSetup: TfrmSetup
     Width = 30
     MaxLength = 2
     TabOrder = 7
-    Text = 'eBackupTimeM'
+    Text = 'eB'
   end
   object Label8: TLabel
     Left = 359
@@ -157,12 +157,12 @@ object frmSetup: TfrmSetup
     Width = 30
     MaxLength = 2
     TabOrder = 8
-    Text = 'eBackupTimeS'
+    Text = 'eB'
   end
   object btnClose: TButton
     Left = 112
     Height = 25
-    Top = 247
+    Top = 306
     Width = 192
     Caption = 'Close and Run in Background'
     OnClick = btnCloseClick
@@ -182,5 +182,48 @@ object frmSetup: TfrmSetup
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
+  end
+  object eDBUser: TEdit
+    Left = 180
+    Height = 23
+    Top = 238
+    Width = 232
+    TabOrder = 10
+    Text = 'eDBUser'
+  end
+  object eDBPass: TEdit
+    Left = 180
+    Height = 23
+    Top = 269
+    Width = 232
+    EchoMode = emPassword
+    PasswordChar = '*'
+    TabOrder = 11
+    Text = 'eDBPass'
+  end
+  object Label9: TLabel
+    Left = 23
+    Height = 15
+    Top = 242
+    Width = 104
+    Caption = 'Database Username'
+    ParentColor = False
+  end
+  object Label11: TLabel
+    Left = 23
+    Height = 15
+    Top = 273
+    Width = 101
+    Caption = 'Database Password'
+    ParentColor = False
+  end
+  object btnQuit: TButton
+    Left = 337
+    Height = 25
+    Top = 304
+    Width = 75
+    Caption = 'Quit'
+    OnClick = btnQuitClick
+    TabOrder = 12
   end
 end

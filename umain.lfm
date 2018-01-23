@@ -559,6 +559,14 @@ object frmMain: TfrmMain
     Caption = 'Label2'
     ParentColor = False
   end
+  object Button1: TButton
+    Left = 160
+    Height = 25
+    Top = 64
+    Width = 75
+    Caption = 'Button1'
+    TabOrder = 0
+  end
   object Timer1: TTimer
     OnTimer = Timer1Timer
     left = 8

@@ -16,6 +16,7 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
+    Button1: TButton;
     Label1: TLabel;
     Label2: TLabel;
     MenuConfig: TMenuItem;
@@ -48,10 +49,11 @@ var
 
 implementation
 
-uses uabout, INIFiles, uSetup;
+uses uabout, INIFiles, uSetup, uDes;
 {$R *.lfm}
 
 { TfrmMain }
+
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 var
@@ -98,11 +100,15 @@ procedure TfrmMain.MenuStopClick(Sender: TObject);
 var
   UserString: string;
 begin
-  if InputQuery('Password', 'Masukkan password untuk menghentikan aplikasi', TRUE, UserString) then
+  {if InputQuery('Password', 'Masukkan password untuk menghentikan aplikasi', TRUE, UserString) then
        begin
           if(UserString='628247') then Application.Terminate;
        end
-  else;
+  else;   }
+  If MessageDlg('Do you want to stop the backup shield?', mtConfirmation,[mbYes,mbNo],0)=mrYES then
+      Application.Terminate;
+
+
 end;
 
 procedure TfrmMain.MyTrayClick(Sender: TObject);
@@ -116,10 +122,13 @@ end;
 procedure TfrmMain.Timer1Timer(Sender: TObject);
 var
   INI:TINIFile;
-  TimeString, TimeString2, saveTo, backupTime, mySQLBinLocation, filePrefix, dbName, tmp : String;
+  TimeString, TimeString2, saveTo,
+  backupTime, mySQLBinLocation, filePrefix,
+  dbName, dbUser, dbPass, tmp, DBUserDec, DBPassDec : String;
   maxFile : Integer;
 const
   C_SECTION = 'INICONFIG';
+  DES_KEY = '%tgtRftk%6!jkyEr74rt*$jO0p';
 begin
 
   INI := TINIFile.Create('config.ini');
@@ -128,15 +137,18 @@ begin
   s := FormatDateTime('dd-mm-yy-hh-nn-ss', now);
   TimeString2 := FormatDateTime('hh:nn:ss', now);
 
-
-
   try
   backupTime := INI.ReadString(C_SECTION,'BackupTime','');
   maxFile := INI.ReadInteger(C_SECTION,'maxFile',1);
   filePrefix := INI.ReadString(C_SECTION,'filePrefix','');
   dbName := INI.ReadString(C_SECTION,'dbName','');
+  dbUser := INI.ReadString(C_SECTION,'dbUser','');
+  dbPass := INI.ReadString(C_SECTION,'dbPass','');
   saveTo := INI.ReadString(C_SECTION,'SaveTo','');
   mySQLBinLocation := INI.ReadString(C_SECTION,'mySQLBinLocation','');
+
+  DBUserDec:= udes.DecryStr(dbUser,DES_KEY);
+  DBPassDec:= udes.DecryStr(dbPass,DES_KEY);
 
   if TimeString2=backupTime THEN
     begin
@@ -146,7 +158,8 @@ begin
       else tmp := '--databases '+ dbName;
 
       OurProcess := TProcess.Create(Application);
-      OurProcess.CommandLine := mySQLBinLocation + 'mysqldump -uroot -hlocalhost -pswu ' + tmp + ' --result-file="' + saveTo + filePrefix + s + '.sql"';
+      //OurProcess.CommandLine := mySQLBinLocation + 'mysqldump -uroot -hlocalhost -pswu ' + tmp + ' --result-file="' + saveTo + filePrefix + s + '.sql"';
+      OurProcess.Executable:= mySQLBinLocation + '/mysqldump -u' + DBUserDec + ' -hlocalhost -p' + DBPassDec + ' ' + tmp + ' --result-file="' + saveTo + filePrefix + s + '.sql"';
       OurProcess.Options := [poUsePipes, poNoConsole];
       OurProcess.Execute;
 
@@ -167,7 +180,6 @@ begin
         end;
         // we are done with file list
         FindClose(Info);
-         showMessage('done');
 
       except
         ShowMessage('Oops, something went wrong!');

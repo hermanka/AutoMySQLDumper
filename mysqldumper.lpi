@@ -106,7 +106,7 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="mysqldumper.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -135,6 +135,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uSetup"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="udes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uDes"/>
+      </Unit4>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

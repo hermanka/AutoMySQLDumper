@@ -9,7 +9,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms,
   { you can add units after this }
-  uniqueinstance_package, uMain, uAbout, uSetup, INIFiles;
+  uniqueinstance_package, uMain, uAbout, uSetup, INIFiles, uDes;
 
 
 

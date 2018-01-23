@@ -27,5 +27,8 @@ implementation
 
 {$R *.lfm}
 
+{ TfrmAbout }
+
+
 end.
 
