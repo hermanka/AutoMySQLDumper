@@ -5,7 +5,7 @@ unit uSetup;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, Registry;
 
 type
 
@@ -56,46 +56,48 @@ var
   frmSetup: TfrmSetup;
 
 const
-  C_SECTION = 'INICONFIG';
+  C_SECTION = '\Software\MyAutoDump\';
   DES_KEY = '%tgtRftk%6!jkyEr74rt*$jO0p';
+
 implementation
 
 {$R *.lfm}
-uses INIFiles, uDes;
+uses uDes, INIFiles;
 
 { TfrmSetup }
 
 procedure TfrmSetup.FormCreate(Sender: TObject);
 var
-  INI:TINIFile;
   BackupTime, dbUser, dbPass: string;
   sl :TStringList;
+  Registry: TRegistry;
 begin
-  INI := TINIFile.Create('config.ini');
+
    sl := TStringList.create;
+
+  Registry := TRegistry.Create;
+  Registry.RootKey := HKEY_CURRENT_USER;
+  Registry.OpenKey(C_SECTION, false);
+
   try
-     eSaveTo.Text := INI.ReadString(C_SECTION,'SaveTo','');
-     BackupTime := INI.ReadString(C_SECTION,'BackupTime','');
-
-     eMaxFile.Text := INI.ReadString(C_SECTION,'maxFile','');
-     eBinLoc.Text := INI.ReadString(C_SECTION,'mySQLBinLocation','');
-     ePrefix.Text := INI.ReadString(C_SECTION,'FilePrefix','');
-     eDBName.Text := INI.ReadString(C_SECTION,'dbName','');
-     dbUser := INI.ReadString(C_SECTION,'dbUser','');
-     dbPass := INI.ReadString(C_SECTION,'dbPass','');
-
-      eDBUser.Text:= udes.DecryStr(dbUser,DES_KEY);
-      eDBPass.Text:= udes.DecryStr(dbPass,DES_KEY);
+     BackupTime := Registry.ReadString('BackupTime');
+     eMaxFile.Text := Registry.ReadString('maxFile');
+     ePrefix.Text := Registry.ReadString('FilePrefix');
+     eDBName.Text := Registry.ReadString('dbName');
+     dbUser := Registry.ReadString('dbUser');
+     dbPass := Registry.ReadString('dbPass');
+     eSaveTo.Text  := Registry.ReadString('SaveTo');
+     eBinLoc.Text := Registry.ReadString('mySQLBinLocation');
+     eDBUser.Text:= udes.DecryStr(dbUser,DES_KEY);
+     eDBPass.Text:= udes.DecryStr(dbPass,DES_KEY);
 
      sl.Delimiter:=':';
      sl.DelimitedText:=BackupTime;
      eBackupTimeH.text:= sl[0];
      eBackupTimeM.text:= sl[1];
      eBackupTimeS.text:= sl[2];
-
-
   finally
-    INI.free;
+    Registry.free;
     sl.Free;
   end;
 
@@ -103,24 +105,31 @@ end;
 
 procedure TfrmSetup.btnSaveConfClick(Sender: TObject);
 var
-  INI : TINIFile;
-  BackupTime, DBUserEnc, DBPassEnc : string;
+   Registry: TRegistry;
+   BackupTime, DBUserEnc, DBPassEnc : string;
 begin
-  INI := TINIFile.Create('config.ini');
+  Registry := TRegistry.Create;
+  Registry.RootKey := HKEY_CURRENT_USER;
+
+
+
+
   try
+     Registry.OpenKey(C_SECTION, true);
      BackupTime := eBackupTimeH.Text + ':' + eBackupTimeM.Text + ':' + eBackupTimeS.Text;
      DBUserEnc:= udes.EncryStr(eDBUser.Text,DES_KEY);
      DBPassEnc:= udes.EncryStr(eDBPass.Text,DES_KEY);
 
-     INI.WriteString(C_SECTION,'SaveTo',eSaveTo.Text);
-     INI.WriteString(C_SECTION,'FinishedConfig','1');
-     INI.WriteString(C_SECTION,'BackupTime',BackupTime);
-     INI.WriteString(C_SECTION,'maxFile',eMaxFile.Text);
-     INI.WriteString(C_SECTION,'mySQLBinLocation',eBinLoc.Text);
-     INI.WriteString(C_SECTION,'FilePrefix',ePrefix.Text);
-     INI.WriteString(C_SECTION,'dbName',eDBName.Text);
-     INI.WriteString(C_SECTION,'dbUser',DBUserEnc);
-     INI.WriteString(C_SECTION,'dbPass',DBPassEnc);
+     Registry.WriteString('SaveTo',eSaveTo.Text);
+     Registry.WriteString('FinishedConfig',inttostr(1));
+     Registry.WriteString('BackupTime',BackupTime);
+     Registry.WriteString('maxFile',eMaxFile.Text);
+     Registry.WriteString('mySQLBinLocation',eBinLoc.Text);
+     Registry.WriteString('FilePrefix',ePrefix.Text);
+     Registry.WriteString('dbUser',DBUserEnc);
+     Registry.WriteString('dbPass',DBPassEnc);
+     Registry.WriteString('dbName',eDBName.Text);
+
      ShowMessage('Configuration saved!');
      self.hide;
      //frmMain.Destroy;

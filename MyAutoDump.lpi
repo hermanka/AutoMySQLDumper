@@ -6,7 +6,7 @@
     <General>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <Title Value="MySQLDumper"/>
+      <Title Value="MyAutoDump"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <Icon Value="0"/>
@@ -60,7 +60,7 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="MySQLDumper"/>
+            <Filename Value="MyAutoDump"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -108,7 +108,7 @@
     </RequiredPackages>
     <Units Count="5">
       <Unit0>
-        <Filename Value="mysqldumper.lpr"/>
+        <Filename Value="MyAutoDump.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>

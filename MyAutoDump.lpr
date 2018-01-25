@@ -1,4 +1,4 @@
-program mysqldumper;
+program MyAutoDump;
 
 {$mode objfpc}{$H+}
 
@@ -18,7 +18,7 @@ uses
 begin
 
 
-  Application.Title:='MySQLDumper';
+  Application.Title:='MyAutoDump';
 
   RequireDerivedFormResource := True;
   Application.Initialize;
